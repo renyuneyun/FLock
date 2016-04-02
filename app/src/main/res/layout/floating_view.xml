@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/transparent"
+    android:clipToPadding="false"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/main_fab"
+        android:contentDescription="@string/app_name"
+        android:layout_width="@dimen/floating_view_width"
+        android:layout_height="@dimen/floating_view_height"
+        android:background="@drawable/background_fb"
+        android:padding="8dp"
+        android:src="@drawable/ic_fb"
+        android:scaleType="centerInside" />
+
+</RelativeLayout>
