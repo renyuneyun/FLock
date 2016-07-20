@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2016 Rui Zhao <renyuneyun@gmail.com>
+  ~
+  ~ This file is part of FLock.
+  ~
+  ~ FLock is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ FLock is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with FLock.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name">FLock</string>
+    <string name="autostart">啓動啓動</string>
+    <string name="autostart_summ">開機時啓動該程序</string>
+    <string name="desc_enable_admin">程序需要“設備管理器”身份以鎖定屏幕</string>
+    <string name="enabled">啓用</string>
+    <string name="enabled_summ">啓用浮動按鈕</string>
+</resources>
