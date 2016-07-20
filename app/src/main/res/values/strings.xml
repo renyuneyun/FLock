@@ -3,7 +3,9 @@
 
     <string name="desc_enable_admin">This app needs to be a "Device Administrator" in order to lock your screen</string>
 
-    <string name="enable_this">Enable</string>
-    <string name="enable_this_summ">Enable the floating button</string>
+    <string name="enabled">Enable</string>
+    <string name="enabled_summ">Enable the floating button</string>
+    <string name="autostart">AutoStart</string>
+    <string name="autostart_summ">Start this app on boot</string>
 
 </resources>

@@ -26,6 +26,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -36,6 +37,7 @@ public class SettingsActivity extends Activity
     final static int ENABLE_ADMIN = 1;
 
     ComponentName adminName;
+    ComponentName receiverName;
     DevicePolicyManager devicePolicyManager;
 
     @Override
@@ -49,6 +51,7 @@ public class SettingsActivity extends Activity
                 .commit();
 
         adminName = new ComponentName(this, MyDeviceAdminReceiver.class);
+        receiverName = new ComponentName(this, AutoStartReceiver.class);
         devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
         applyFB();
@@ -56,21 +59,15 @@ public class SettingsActivity extends Activity
 
     private void applyFB() {
         SharedPreferences defaultSharedPreference = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean enable = defaultSharedPreference.getBoolean(getString(R.string.key_pref_enable), false);
-        applyFB(enable);
-    }
-
-    private void applyFB(boolean enable) {
-        if (enable) {
+        boolean enabled = defaultSharedPreference.getBoolean(getString(R.string.key_pref_enabled), false);
+        if (enabled) {
             if (devicePolicyManager.isAdminActive(adminName)) {
-                Intent intent = new Intent(this, FBService.class);
-                startService(intent);
+                FBService.launch(this);
             } else {
                 Log.e("applyFB", "Refused to start floating button (admin not activated)");
             }
         } else {
-            Intent intent = new Intent(this, FBService.class);
-            stopService(intent);
+            FBService.destroy(this);
         }
     }
 
@@ -84,13 +81,20 @@ public class SettingsActivity extends Activity
 
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        if (key.equals(getString(R.string.key_pref_enable))) {
+        if (key.equals(getString(R.string.key_pref_enabled))) {
             if (sharedPreferences.getBoolean(key, false)) {
                 if (!devicePolicyManager.isAdminActive(adminName)) {
                     showAdminManagement();
                 }
             }
             applyFB();
+        } else if (key.equals(getString(R.string.key_pref_autostart))) {
+            PackageManager packageManager = getPackageManager();
+            if (sharedPreferences.getBoolean(key, false)) {
+                packageManager.setComponentEnabledSetting(receiverName, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+            } else {
+                packageManager.setComponentEnabledSetting(receiverName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+            }
         }
     }
 

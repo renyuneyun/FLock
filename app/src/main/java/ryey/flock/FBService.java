@@ -52,6 +52,20 @@ public class FBService extends Service {
 
     private boolean longClickAble = true;
 
+    public static void launch(Context context) {
+        SharedPreferences defaultSharedPreference = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean enabled = defaultSharedPreference.getBoolean(context.getString(R.string.key_pref_enabled), false);
+        if (enabled) {
+            Intent intent = new Intent(context, FBService.class);
+            context.startService(intent);
+        }
+    }
+
+    public static void destroy(Context context) {
+        Intent intent = new Intent(context, FBService.class);
+        context.stopService(intent);
+    }
+
     @Override
     public IBinder onBind(Intent intent) {
         throw new UnsupportedOperationException("Not yet implemented");

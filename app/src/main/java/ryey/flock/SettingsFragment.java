@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 
 public class SettingsFragment extends PreferenceFragment {
 
