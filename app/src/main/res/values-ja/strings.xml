@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">FLock</string>
+
+    <string name="desc_enable_admin">このアプリは画面をロックするために "デバイス管理者" になる必要があります</string>
+
+    <string name="enabled">有効</string>
+    <string name="enabled_summ">フローティングボタンを有効にします</string>
+    <string name="autostart">自動開始</string>
+    <string name="autostart_summ">起動時にアプリを開始します</string>
+    <string name="long_action">長押し操作</string>
+    <string name="long_action_summ">フローティングボタンを長押しすることで操作を実行します</string>
+
+
+</resources>
