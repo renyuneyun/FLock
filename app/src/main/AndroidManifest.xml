@@ -38,17 +38,19 @@
             android:exported="false" />
         <service
             android:name=".LockScreenIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
 
         <receiver
             android:name=".AutoStartReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <category android:name="android.intent.category.HOME"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

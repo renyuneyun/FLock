@@ -7,5 +7,8 @@
     <string name="enabled_summ">Enable the floating button</string>
     <string name="autostart">AutoStart</string>
     <string name="autostart_summ">Start this app on boot</string>
+    <string name="long_action">Long-click action</string>
+    <string name="long_action_summ">The Action performed by long-clicking the floating button</string>
+
 
 </resources>

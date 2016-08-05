@@ -51,6 +51,7 @@ public class FBService extends Service {
     private WindowManager windowManager;
 
     private boolean longClickAble = true;
+    private boolean longClicked = false;
 
     public static void launch(Context context) {
         SharedPreferences defaultSharedPreference = PreferenceManager.getDefaultSharedPreferences(context);
@@ -88,7 +89,15 @@ public class FBService extends Service {
             @Override
             public boolean onLongClick(View view) {
                 if (longClickAble) {
-                    Toast.makeText(floatingView.getContext(), "(floating view) on long click", Toast.LENGTH_SHORT).show();
+                    SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(FBService.this);
+                    final String action = defaultSharedPreferences.getString(getString(R.string.key_pref_long_action), "");
+                    if (!action.isEmpty()) {
+                        sendBroadcast(new Intent(action));
+                        Log.d("FloatingView", "(long-click) broadcast sent");
+                    } else {
+                        Log.d("FloatingView", "(long-click) empty action. no sending");
+                    }
+                    longClicked = true;
                     return true;
                 } else
                     return false;
@@ -109,8 +118,11 @@ public class FBService extends Service {
                         tx0 = event.getRawX();
                         ty0 = event.getRawY();
                         longClickAble = true;
+                        longClicked = false;
                         break;
                     case MotionEvent.ACTION_UP:
+                        if (longClicked)
+                            break;
                         if ((Math.abs(params.x - x0) < threshold) && (Math.abs(params.y - y0) < threshold)) {
                             //Trigger tap action
                             LockScreenIntentService.startActionLockScreen(floatingView.getContext());

@@ -12,4 +12,10 @@
         android:title="@string/autostart"
         android:summary="@string/autostart_summ"
         android:defaultValue="false" />
+    <EditTextPreference
+        android:id="@+id/pref_long_action"
+        android:key="@string/key_pref_long_action"
+        android:title="@string/long_action"
+        android:summary="@string/long_action_summ"
+        android:defaultValue="" />
 </PreferenceScreen>
