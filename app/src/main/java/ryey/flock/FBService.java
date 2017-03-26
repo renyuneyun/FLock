@@ -145,6 +145,19 @@ public class FBService extends Service {
             }
         });
 
+        if (preference.getBoolean(getString(R.string.key_pref_hide_on_fullscreen), false)) {
+            floatingView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+                @Override
+                public void onSystemUiVisibilityChange(int i) {
+                    if (i == 0) { // not on any fullscreen mode
+                        floatingView.setVisibility(View.VISIBLE);
+                    } else {
+                        floatingView.setVisibility(View.GONE);
+                    }
+                }
+            });
+        }
+
         params.x = preference.getInt(FLOATING_VIEW_X, 300);
         params.y = preference.getInt(FLOATING_VIEW_Y, 0);
         params.width = getResources().getDimensionPixelSize(R.dimen.floating_view_width);

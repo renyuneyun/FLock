@@ -12,6 +12,8 @@
     <string name="autostart_summ">Start this app on boot</string>
     <string name="show_launcher_lock">Launcher Lock</string>
     <string name="show_launcher_lock_summ">Show the lock entry in launcher\n(may take a while see the effect)</string>
+    <string name="hide_on_fullscreen">Hide on fullscreen</string>
+    <string name="hide_on_fullscreen_summ">Hide the floating icon on fullscreen mode</string>
     <string name="long_action">Long-click action</string>
     <string name="long_action_summ">The Action performed by long-clicking the floating button</string>
 

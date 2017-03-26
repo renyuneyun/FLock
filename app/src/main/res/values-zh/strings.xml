@@ -12,4 +12,6 @@
     <string name="launcher_setting">浮懸鎖屏設置</string>
     <string name="show_launcher_lock">啓動器中鎖定項</string>
     <string name="show_launcher_lock_summ">在啓動器中顯示鎖定項\n(或需稍候片刻以見效)</string>
+    <string name="hide_on_fullscreen">全屏時隱藏</string>
+    <string name="hide_on_fullscreen_summ">當處於全屏狀態時隱藏浮懸按鈕</string>
 </resources>

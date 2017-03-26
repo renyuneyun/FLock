@@ -17,6 +17,11 @@
         android:title="@string/show_launcher_lock"
         android:summary="@string/show_launcher_lock_summ"
         android:defaultValue="true" />
+    <CheckBoxPreference
+        android:key="@string/key_pref_hide_on_fullscreen"
+        android:title="@string/hide_on_fullscreen"
+        android:summary="@string/hide_on_fullscreen_summ"
+        android:defaultValue="true" />
     <EditTextPreference
         android:id="@+id/pref_long_action"
         android:key="@string/key_pref_long_action"
