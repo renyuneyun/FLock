@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">FLock</string>
 
+    <string name="launcher_lock">FLock Now</string>
+    <string name="launcher_setting">FLock Settings</string>
+
     <string name="desc_enable_admin">This app needs to be a "Device Administrator" in order to lock your screen</string>
 
     <string name="enabled">Enable</string>
     <string name="enabled_summ">Enable the floating button</string>
     <string name="autostart">AutoStart</string>
     <string name="autostart_summ">Start this app on boot</string>
+    <string name="show_launcher_lock">Launcher Lock</string>
+    <string name="show_launcher_lock_summ">Show the lock entry in launcher\n(may take a while see the effect)</string>
     <string name="long_action">Long-click action</string>
     <string name="long_action_summ">The Action performed by long-clicking the floating button</string>
 

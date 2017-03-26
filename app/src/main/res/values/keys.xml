@@ -2,5 +2,6 @@
 <resources>
     <string name="key_pref_enabled" translatable="false">pref_enabled</string>
     <string name="key_pref_autostart" translatable="false">pref_autostart</string>
+    <string name="key_pref_launcher_lock" translatable="false">pref_launcher_lock</string>
     <string name="key_pref_long_action" translatable="false">pref_long_action</string>
 </resources>

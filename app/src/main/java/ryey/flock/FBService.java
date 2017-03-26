@@ -31,7 +31,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 public class FBService extends Service {
     public static final String FLOATING_VIEW_X = "floating_view_x";
@@ -125,7 +124,7 @@ public class FBService extends Service {
                             break;
                         if ((Math.abs(params.x - x0) < threshold) && (Math.abs(params.y - y0) < threshold)) {
                             //Trigger tap action
-                            LockScreenIntentService.startActionLockScreen(floatingView.getContext());
+                            LockScreenHelper.startActionLockScreen(floatingView.getContext());
                         } else {
                             preference.edit()
                                     .putInt(FLOATING_VIEW_X, params.x)

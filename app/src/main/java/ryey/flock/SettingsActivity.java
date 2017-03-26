@@ -20,10 +20,7 @@
 package ryey.flock;
 
 import android.app.Activity;
-import android.app.admin.DeviceAdminReceiver;
-import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -34,15 +31,13 @@ import android.util.Log;
 public class SettingsActivity extends Activity
         implements SharedPreferences.OnSharedPreferenceChangeListener{
 
-    final static int ENABLE_ADMIN = 1;
-
-    ComponentName adminName;
     ComponentName receiverName;
-    DevicePolicyManager devicePolicyManager;
+    ComponentName launcher_lock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle(getString(R.string.app_name));
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
@@ -50,9 +45,8 @@ public class SettingsActivity extends Activity
                 .replace(android.R.id.content, new SettingsFragment())
                 .commit();
 
-        adminName = new ComponentName(this, MyDeviceAdminReceiver.class);
         receiverName = new ComponentName(this, AutoStartReceiver.class);
-        devicePolicyManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+        launcher_lock = new ComponentName(this, LockActivity.class);
 
         applyFB();
     }
@@ -61,7 +55,7 @@ public class SettingsActivity extends Activity
         SharedPreferences defaultSharedPreference = PreferenceManager.getDefaultSharedPreferences(this);
         boolean enabled = defaultSharedPreference.getBoolean(getString(R.string.key_pref_enabled), false);
         if (enabled) {
-            if (devicePolicyManager.isAdminActive(adminName)) {
+            if (LockScreenHelper.checkDeviceAdmin(this)) {
                 FBService.launch(this);
             } else {
                 Log.e("applyFB", "Refused to start floating button (admin not activated)");
@@ -71,21 +65,11 @@ public class SettingsActivity extends Activity
         }
     }
 
-    private void showAdminManagement() {
-        Log.d("SettingsActivity", "showAdminManagement");
-        Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminName);
-        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, R.string.desc_enable_admin);
-        startActivityForResult(intent, ENABLE_ADMIN);
-    }
-
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
         if (key.equals(getString(R.string.key_pref_enabled))) {
             if (sharedPreferences.getBoolean(key, false)) {
-                if (!devicePolicyManager.isAdminActive(adminName)) {
-                    showAdminManagement();
-                }
+                LockScreenHelper.requireDeviceAdmin(this);
             }
             applyFB();
         } else if (key.equals(getString(R.string.key_pref_autostart))) {
@@ -95,9 +79,21 @@ public class SettingsActivity extends Activity
             } else {
                 packageManager.setComponentEnabledSetting(receiverName, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
             }
+        } else if (key.equals(getString(R.string.key_pref_launcher_lock))) {
+            PackageManager packageManager = getPackageManager();
+            if (sharedPreferences.getBoolean(key, false)) {
+                packageManager.setComponentEnabledSetting(launcher_lock, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+            } else {
+                packageManager.setComponentEnabledSetting(launcher_lock, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+            }
         }
     }
 
-    public static class MyDeviceAdminReceiver extends DeviceAdminReceiver {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == LockScreenHelper.ENABLE_ADMIN) { // should be replaced by a static method in LockScreenHelper?
+            applyFB();
+        }
     }
 }

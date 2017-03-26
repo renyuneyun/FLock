@@ -11,16 +11,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingsActivity">
+        <activity android:name=".SettingsActivity"
+            android:label="@string/launcher_setting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
+        <activity android:name=".LockActivity"
+            android:label="@string/launcher_lock">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <receiver
-            android:name=".SettingsActivity$MyDeviceAdminReceiver"
+            android:name=".LockScreenHelper$MyDeviceAdminReceiver"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
@@ -37,7 +45,7 @@
             android:enabled="true"
             android:exported="false" />
         <service
-            android:name=".LockScreenIntentService"
+            android:name=".LockScreenHelper$LockScreenIntentService"
             android:exported="false" />
 
         <receiver
@@ -50,7 +58,6 @@
                 <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </receiver>
-
     </application>
 
 </manifest>

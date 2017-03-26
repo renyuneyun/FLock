@@ -8,4 +8,8 @@
     <string name="enabled_summ">啓用浮懸按鈕</string>
     <string name="long_action">長按動作</string>
     <string name="long_action_summ">當長按浮懸按鈕時執行的動作</string>
+    <string name="launcher_lock">立即鎖定</string>
+    <string name="launcher_setting">浮懸鎖屏設置</string>
+    <string name="show_launcher_lock">啓動器中鎖定項</string>
+    <string name="show_launcher_lock_summ">在啓動器中顯示鎖定項\n(或需稍候片刻以見效)</string>
 </resources>

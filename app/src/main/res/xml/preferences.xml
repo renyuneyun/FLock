@@ -12,6 +12,11 @@
         android:title="@string/autostart"
         android:summary="@string/autostart_summ"
         android:defaultValue="false" />
+    <CheckBoxPreference
+        android:key="@string/key_pref_launcher_lock"
+        android:title="@string/show_launcher_lock"
+        android:summary="@string/show_launcher_lock_summ"
+        android:defaultValue="true" />
     <EditTextPreference
         android:id="@+id/pref_long_action"
         android:key="@string/key_pref_long_action"
